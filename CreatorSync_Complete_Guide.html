@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CreatorSync — Complete Project Guide</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      font-size: 13px;
+      line-height: 1.7;
+      color: #1f2328;
+      background: #fff;
+      padding: 40px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    /* ── Cover ── */
+    .cover {
+      text-align: center;
+      padding: 60px 20px 50px;
+      border-bottom: 3px solid #6366f1;
+      margin-bottom: 40px;
+    }
+    .cover h1 {
+      font-size: 38px;
+      font-weight: 800;
+      color: #6366f1;
+      letter-spacing: -1px;
+    }
+    .cover .tagline {
+      font-size: 16px;
+      color: #57606a;
+      margin-top: 8px;
+    }
+    .cover .badge-row {
+      margin-top: 20px;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .badge {
+      background: #f0f0ff;
+      color: #6366f1;
+      border: 1px solid #c7d2fe;
+      border-radius: 20px;
+      padding: 4px 14px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    /* ── Section headers ── */
+    h2 {
+      font-size: 20px;
+      font-weight: 700;
+      color: #6366f1;
+      border-left: 4px solid #6366f1;
+      padding-left: 12px;
+      margin: 36px 0 14px;
+    }
+    h3 {
+      font-size: 14px;
+      font-weight: 700;
+      color: #1f2328;
+      margin: 20px 0 6px;
+    }
+    h4 {
+      font-size: 13px;
+      font-weight: 700;
+      color: #3b4151;
+      margin: 14px 0 4px;
+    }
+    p { margin-bottom: 8px; }
+
+    /* ── Tables ── */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 12px 0 18px;
+      font-size: 12.5px;
+    }
+    th {
+      background: #6366f1;
+      color: #fff;
+      padding: 8px 12px;
+      text-align: left;
+      font-weight: 600;
+    }
+    td {
+      padding: 7px 12px;
+      border-bottom: 1px solid #e5e7eb;
+      vertical-align: top;
+    }
+    tr:nth-child(even) td { background: #f7f8ff; }
+
+    /* ── Code blocks ── */
+    pre {
+      background: #f6f8fa;
+      border: 1px solid #e5e7eb;
+      border-radius: 6px;
+      padding: 14px 16px;
+      font-family: 'Consolas', 'Courier New', monospace;
+      font-size: 12px;
+      overflow-x: auto;
+      margin: 10px 0 16px;
+      line-height: 1.6;
+    }
+    code {
+      background: #f0f0f5;
+      border-radius: 3px;
+      padding: 1px 5px;
+      font-family: 'Consolas', 'Courier New', monospace;
+      font-size: 12px;
+      color: #6366f1;
+    }
+
+    /* ── Lists ── */
+    ul, ol {
+      padding-left: 22px;
+      margin: 6px 0 12px;
+    }
+    li { margin-bottom: 4px; }
+
+    /* ── Info boxes ── */
+    .box {
+      border-radius: 8px;
+      padding: 14px 16px;
+      margin: 12px 0;
+    }
+    .box-blue  { background: #eff6ff; border-left: 4px solid #3b82f6; }
+    .box-green { background: #f0fdf4; border-left: 4px solid #22c55e; }
+    .box-yellow{ background: #fffbeb; border-left: 4px solid #f59e0b; }
+    .box-red   { background: #fff1f2; border-left: 4px solid #ef4444; }
+    .box-purple{ background: #f5f3ff; border-left: 4px solid #6366f1; }
+
+    /* ── Q&A ── */
+    .qa { margin-bottom: 16px; }
+    .qa .q {
+      background: #f0f0ff;
+      border-left: 4px solid #6366f1;
+      padding: 8px 12px;
+      font-weight: 700;
+      border-radius: 0 6px 6px 0;
+      margin-bottom: 4px;
+    }
+    .qa .a {
+      padding: 8px 12px;
+      background: #fafafa;
+      border: 1px solid #e5e7eb;
+      border-radius: 6px;
+    }
+
+    /* ── Divider ── */
+    hr {
+      border: none;
+      border-top: 1px solid #e5e7eb;
+      margin: 30px 0;
+    }
+
+    /* ── Print ── */
+    @media print {
+      body { padding: 20px; font-size: 12px; }
+      h2 { page-break-before: always; }
+      .cover { page-break-after: always; }
+      pre, table { page-break-inside: avoid; }
+      .qa { page-break-inside: avoid; }
+    }
+
+    .toc-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 5px 0;
+      border-bottom: 1px dotted #d1d5db;
+      font-size: 13px;
+    }
+    .toc-item span { color: #57606a; }
+
+    .chip {
+      display: inline-block;
+      background: #e0e7ff;
+      color: #4338ca;
+      border-radius: 4px;
+      padding: 1px 7px;
+      font-size: 11px;
+      font-weight: 600;
+      margin-right: 4px;
+    }
+    .chip.green { background: #dcfce7; color: #15803d; }
+    .chip.red   { background: #fee2e2; color: #dc2626; }
+    .chip.yellow{ background: #fef9c3; color: #a16207; }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════ COVER ═══════════════════════════════ -->
+<div class="cover">
+  <h1>CreatorSync</h1>
+  <p class="tagline">Complete Project Guide — Frontend, Backend, Deployment & SIH Prep</p>
+  <div class="badge-row">
+    <span class="badge">React 18</span>
+    <span class="badge">FastAPI</span>
+    <span class="badge">SQLite</span>
+    <span class="badge">OpenAI GPT-4o-mini</span>
+    <span class="badge">APScheduler</span>
+    <span class="badge">Render</span>
+    <span class="badge">JWT Auth</span>
+    <span class="badge">OAuth 2.0</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════ TABLE OF CONTENTS ═══════════════════ -->
+<h2>Table of Contents</h2>
+<div class="toc-item"><span>1. Project Overview</span><span>§1</span></div>
+<div class="toc-item"><span>2. Technology Stack</span><span>§2</span></div>
+<div class="toc-item"><span>3. System Architecture</span><span>§3</span></div>
+<div class="toc-item"><span>4. Data Models</span><span>§4</span></div>
+<div class="toc-item"><span>5. API Reference</span><span>§5</span></div>
+<div class="toc-item"><span>6. Frontend — Complete Guide</span><span>§6</span></div>
+<div class="toc-item"><span>7. Backend — Complete Guide</span><span>§7</span></div>
+<div class="toc-item"><span>8. Authentication Flow</span><span>§8</span></div>
+<div class="toc-item"><span>9. AI Integration</span><span>§9</span></div>
+<div class="toc-item"><span>10. Publishing & Scheduler</span><span>§10</span></div>
+<div class="toc-item"><span>11. Security</span><span>§11</span></div>
+<div class="toc-item"><span>12. Deployment Guide (Render)</span><span>§12</span></div>
+<div class="toc-item"><span>13. Known Limitations</span><span>§13</span></div>
+<div class="toc-item"><span>14. SIH Judge Q&amp;A — Frontend</span><span>§14</span></div>
+<div class="toc-item"><span>15. SIH Judge Q&amp;A — Backend</span><span>§15</span></div>
+<div class="toc-item"><span>16. SIH Judge Q&amp;A — General</span><span>§16</span></div>
+
+<!-- ═══════════════════════════════ §1 PROJECT OVERVIEW ═════════════════ -->
+<h2>§1 — Project Overview</h2>
+<p><strong>CreatorSync</strong> is a full-stack web application that lets social media content creators plan, schedule, and automatically publish posts across YouTube, Instagram, TikTok, and Twitter — all from one place, powered by an AI assistant (OpenAI GPT-4o-mini).</p>
+
+<h3>Problem Statement</h3>
+<p>Content creators manually manage 4+ social media platforms daily. There is no single tool that combines scheduling + AI content generation + multi-platform publishing. Time is wasted on repetitive tasks: writing captions, finding hashtags, switching between apps.</p>
+
+<h3>Solution</h3>
+<ul>
+  <li>📅 <strong>Visual Content Calendar</strong> — Plan posts with month/week/day views</li>
+  <li>🤖 <strong>AI Assistant</strong> — Generate ideas, captions &amp; hashtags using GPT-4o-mini</li>
+  <li>🚀 <strong>Auto-Publisher</strong> — Schedule once, auto-publish to all platforms</li>
+  <li>🔐 <strong>Secure Auth</strong> — JWT + bcrypt + Fernet-encrypted OAuth tokens</li>
+</ul>
+
+<h3>Out of Scope</h3>
+<ul>
+  <li>Analytics dashboards</li>
+  <li>Team/collaboration features</li>
+  <li>Paid subscription billing</li>
+  <li>Mobile native apps</li>
+</ul>
+
+<!-- ═══════════════════════════════ §2 TECH STACK ════════════════════════ -->
+<h2>§2 — Technology Stack</h2>
+<table>
+  <tr><th>Layer</th><th>Technology</th><th>Why</th></tr>
+  <tr><td>Frontend</td><td>React 18 + Vite</td><td>Fast dev server, component-based UI</td></tr>
+  <tr><td>Styling</td><td>Tailwind CSS</td><td>Utility-first, rapid UI building</td></tr>
+  <tr><td>State Management</td><td>React Context + useState</td><td>Simple enough, no Redux needed</td></tr>
+  <tr><td>HTTP Client</td><td>Axios</td><td>Interceptors for auto JWT headers</td></tr>
+  <tr><td>Calendar UI</td><td>react-big-calendar</td><td>Drop-in calendar with month/week/day views</td></tr>
+  <tr><td>Backend</td><td>FastAPI (Python 3.11+)</td><td>Async, auto OpenAPI docs, fast</td></tr>
+  <tr><td>ORM</td><td>SQLAlchemy 2.x</td><td>Maps Python classes to DB tables</td></tr>
+  <tr><td>Database</td><td>SQLite</td><td>Zero config, file-based</td></tr>
+  <tr><td>Auth</td><td>python-jose (JWT) + passlib (bcrypt)</td><td>Standard JWT pattern</td></tr>
+  <tr><td>Platform OAuth</td><td>Authlib</td><td>Handles OAuth 2.0 for all 4 platforms</td></tr>
+  <tr><td>AI</td><td>OpenAI Python SDK (gpt-4o-mini)</td><td>Cheap, fast, good text quality</td></tr>
+  <tr><td>Scheduler</td><td>APScheduler</td><td>In-process background job scheduling</td></tr>
+  <tr><td>Deployment</td><td>Render (backend + frontend)</td><td>Free tier, GitHub-connected</td></tr>
+  <tr><td>CI/CD</td><td>GitHub Actions</td><td>Auto runs tests on every push</td></tr>
+  <tr><td>Testing (Backend)</td><td>pytest + httpx TestClient</td><td>Unit + integration tests</td></tr>
+  <tr><td>Testing (Frontend)</td><td>Vitest + React Testing Library</td><td>Component + unit tests</td></tr>
+</table>
+
+<!-- ═══════════════════════════════ §3 ARCHITECTURE ═════════════════════ -->
+<h2>§3 — System Architecture</h2>
+<pre>
+React (Vite) Frontend
+        │
+        │  HTTP (Axios + JWT)
+        ▼
+  FastAPI Backend  ──────────────────────────────────────────────
+        │                      │               │                │
+        ▼                      ▼               ▼                ▼
+  SQLite (SQLAlchemy)    OpenAI API      APScheduler      Platform APIs
+  (Users, Posts,        (gpt-4o-mini)   (Background      (Twitter, Instagram,
+   PlatformTokens)                       Jobs)            YouTube, TikTok)
+</pre>
+
+<h3>3 Core Data Flows</h3>
+
+<h4>Flow 1 — Create &amp; Schedule a Post</h4>
+<pre>
+User fills PostForm (React)
+  → POST /posts (Axios + JWT header)
+    → posts router → PostService.create_post()
+      → Insert Post row (status=scheduled)
+      → SchedulerService.schedule_job(post)
+    → Return Post JSON → React updates calendar
+</pre>
+
+<h4>Flow 2 — Auto Publish at Scheduled Time</h4>
+<pre>
+APScheduler fires job at scheduled_at
+  → PublishService.publish_post(post_id)
+    → Load Post + PlatformTokens from DB
+    → For each platform in post.platforms:
+        Publisher.publish(post, token) → Call Platform API
+    → Update post.status = "published" or "failed"
+</pre>
+
+<h4>Flow 3 — AI Caption Generation</h4>
+<pre>
+User clicks "Generate Caption" in PostForm
+  → POST /ai/caption { topic, platform }
+    → AiService.generate_caption() → OpenAI API call
+    → Return { caption: "..." }
+  → React inserts caption into PostForm content field
+</pre>
+
+<!-- ═══════════════════════════════ §4 DATA MODELS ═══════════════════════ -->
+<h2>§4 — Data Models</h2>
+
+<h3>User</h3>
+<table>
+  <tr><th>Field</th><th>Type</th><th>Notes</th></tr>
+  <tr><td>id</td><td>Integer PK</td><td>Auto-increment</td></tr>
+  <tr><td>email</td><td>String</td><td>Unique, indexed</td></tr>
+  <tr><td>hashed_password</td><td>String</td><td>bcrypt hash — never plaintext</td></tr>
+  <tr><td>display_name</td><td>String</td><td>Shown in Navbar</td></tr>
+  <tr><td>created_at</td><td>DateTime</td><td>UTC</td></tr>
+</table>
+
+<h3>Post</h3>
+<table>
+  <tr><th>Field</th><th>Type</th><th>Notes</th></tr>
+  <tr><td>id</td><td>Integer PK</td><td></td></tr>
+  <tr><td>user_id</td><td>FK → User</td><td>Ownership check on every mutation</td></tr>
+  <tr><td>title</td><td>String</td><td>Internal label</td></tr>
+  <tr><td>content</td><td>Text</td><td>Post body/caption, max 2200 chars</td></tr>
+  <tr><td>media_url</td><td>String</td><td>Optional externally hosted image/video URL</td></tr>
+  <tr><td>platforms</td><td>JSON</td><td>e.g. ["twitter","instagram"]</td></tr>
+  <tr><td>scheduled_at</td><td>DateTime</td><td>UTC when to publish</td></tr>
+  <tr><td>status</td><td>Enum</td><td>draft / scheduled / published / failed</td></tr>
+  <tr><td>publish_error</td><td>Text</td><td>Error message if status=failed</td></tr>
+  <tr><td>created_at / updated_at</td><td>DateTime</td><td></td></tr>
+</table>
+
+<h3>PlatformToken</h3>
+<table>
+  <tr><th>Field</th><th>Type</th><th>Notes</th></tr>
+  <tr><td>id</td><td>Integer PK</td><td></td></tr>
+  <tr><td>user_id</td><td>FK → User</td><td></td></tr>
+  <tr><td>platform</td><td>String</td><td>twitter / instagram / youtube / tiktok</td></tr>
+  <tr><td>access_token</td><td>Text</td><td>Fernet-encrypted at rest</td></tr>
+  <tr><td>refresh_token</td><td>Text</td><td>Fernet-encrypted at rest</td></tr>
+  <tr><td>expires_at</td><td>DateTime</td><td>For refresh logic</td></tr>
+</table>
+
+<!-- ═══════════════════════════════ §5 API REFERENCE ════════════════════ -->
+<h2>§5 — API Reference</h2>
+<table>
+  <tr><th>Method</th><th>Path</th><th>Description</th><th>Auth</th></tr>
+  <tr><td>POST</td><td>/auth/register</td><td>Create new user account</td><td>No</td></tr>
+  <tr><td>POST</td><td>/auth/login</td><td>Login, returns JWT</td><td>No</td></tr>
+  <tr><td>GET</td><td>/auth/me</td><td>Current user profile</td><td>Yes</td></tr>
+  <tr><td>GET</td><td>/posts</td><td>List all user's posts</td><td>Yes</td></tr>
+  <tr><td>POST</td><td>/posts</td><td>Create new post</td><td>Yes</td></tr>
+  <tr><td>GET</td><td>/posts/{id}</td><td>Get single post</td><td>Yes</td></tr>
+  <tr><td>PUT</td><td>/posts/{id}</td><td>Update post</td><td>Yes</td></tr>
+  <tr><td>DELETE</td><td>/posts/{id}</td><td>Delete post</td><td>Yes</td></tr>
+  <tr><td>POST</td><td>/posts/{id}/publish-now</td><td>Immediately publish</td><td>Yes</td></tr>
+  <tr><td>GET</td><td>/platforms/status</td><td>Platform connection status</td><td>Yes</td></tr>
+  <tr><td>GET</td><td>/platforms/{name}/connect</td><td>Start OAuth flow</td><td>Yes</td></tr>
+  <tr><td>GET</td><td>/platforms/{name}/callback</td><td>OAuth callback, saves token</td><td>No</td></tr>
+  <tr><td>DELETE</td><td>/platforms/{name}/disconnect</td><td>Remove platform token</td><td>Yes</td></tr>
+  <tr><td>POST</td><td>/ai/ideas</td><td>Generate content ideas</td><td>Yes</td></tr>
+  <tr><td>POST</td><td>/ai/caption</td><td>Generate a caption</td><td>Yes</td></tr>
+  <tr><td>POST</td><td>/ai/hashtags</td><td>Generate hashtags</td><td>Yes</td></tr>
+  <tr><td>GET</td><td>/health</td><td>Health check endpoint</td><td>No</td></tr>
+</table>
+
+<!-- ═══════════════════════════════ §6 FRONTEND ══════════════════════════ -->
+<h2>§6 — Frontend — Complete Guide</h2>
+
+<h3>Folder Structure</h3>
+<pre>
+frontend/src/
+├── main.jsx              ← Entry point, mounts React into index.html
+├── App.jsx               ← Router setup + Error Boundary
+├── index.css             ← Global Tailwind CSS styles
+├── api/
+│   ├── axiosClient.js    ← Axios instance (base URL + JWT injection + 401 handler)
+│   ├── authApi.js        ← login(), register(), me()
+│   ├── postsApi.js       ← list(), get(), create(), update(), remove(), publishNow()
+│   ├── platformsApi.js   ← status(), connect(), disconnect()
+│   └── aiApi.js          ← ideas(), caption(), hashtags()
+├── context/
+│   └── AuthContext.jsx   ← Global auth state (user, token, login, logout)
+├── pages/
+│   ├── LoginPage.jsx
+│   ├── RegisterPage.jsx
+│   ├── DashboardPage.jsx
+│   ├── CalendarPage.jsx
+│   ├── NewPostPage.jsx
+│   ├── EditPostPage.jsx
+│   ├── ConnectPlatformsPage.jsx
+│   └── AiAssistantPage.jsx
+├── components/
+│   ├── Navbar.jsx            ← Sticky nav, hamburger on mobile
+│   ├── ProtectedRoute.jsx    ← Redirects to /login if no token
+│   ├── PostCard.jsx          ← Dashboard post card (Edit/Publish/Delete)
+│   ├── PostForm.jsx          ← Shared form for create + edit
+│   ├── AiSuggestionPanel.jsx ← Ideas/Caption/Hashtags AI panel
+│   ├── PlatformBadge.jsx     ← Platform icon+status badge
+│   └── LoadingSpinner.jsx    ← Spinner during API calls
+└── utils/
+    └── validators.js         ← All form validation logic
+</pre>
+
+<h3>Pages Explained</h3>
+<table>
+  <tr><th>Page</th><th>What It Does</th></tr>
+  <tr><td>LoginPage</td><td>Email + password form. Validates client-side, calls POST /auth/login, saves JWT to localStorage, navigates to dashboard.</td></tr>
+  <tr><td>RegisterPage</td><td>Display name + email + password. On success auto-logs in and goes to dashboard.</td></tr>
+  <tr><td>DashboardPage</td><td>4 stat cards (Total/Scheduled/Published/Drafts), filter tabs (All/Draft/Scheduled/Published/Failed), grid of PostCards with Edit/Publish Now/Delete.</td></tr>
+  <tr><td>CalendarPage</td><td>react-big-calendar with color-coded events. Gray=Draft, Yellow=Scheduled, Green=Published, Red=Failed. Click date → new post. Click event → edit post.</td></tr>
+  <tr><td>NewPostPage</td><td>Renders PostForm for creating. Reads ?date= from URL when coming from calendar.</td></tr>
+  <tr><td>EditPostPage</td><td>Loads post by ID from API, renders PostForm pre-filled with existing data.</td></tr>
+  <tr><td>AiAssistantPage</td><td>Standalone page wrapping AiSuggestionPanel for free brainstorming.</td></tr>
+  <tr><td>ConnectPlatformsPage</td><td>Shows connected/disconnected status for all 4 platforms with Connect/Disconnect buttons.</td></tr>
+</table>
+
+<h3>Key Components Explained</h3>
+
+<h4>PostForm.jsx</h4>
+<p>The most important component. Contains: Title, Content (2200 char counter), Media URL, Platform selector (toggle buttons), Status dropdown, Scheduled datetime picker. Has a collapsible <strong>AI Assistant panel</strong> — clicking "Use This Caption" inserts AI output directly into the content field.</p>
+
+<h4>AiSuggestionPanel.jsx</h4>
+<p>Topic input + Platform dropdown. Three buttons: 💡 Ideas, ✍️ Caption, #️⃣ Hashtags. Each makes a separate API call. Shows loading spinner during request. Results displayed below with "Use" buttons that push content into the form via callback props.</p>
+
+<h4>axiosClient.js</h4>
+<ul>
+  <li><strong>Request interceptor</strong>: reads token from <code>localStorage</code>, attaches as <code>Authorization: Bearer &lt;token&gt;</code></li>
+  <li><strong>Response interceptor</strong>: catches 401 → clears token → redirects to /login automatically</li>
+  <li>Base URL from <code>VITE_API_URL</code> environment variable</li>
+</ul>
+
+<h4>AuthContext.jsx</h4>
+<ul>
+  <li>On app load: calls <code>/auth/me</code> to verify stored token is still valid</li>
+  <li>Provides: <code>user</code>, <code>token</code>, <code>loading</code>, <code>login()</code>, <code>logout()</code> to entire app</li>
+  <li>Token stored in <code>localStorage</code> as key <code>cs_token</code></li>
+</ul>
+
+<h4>ProtectedRoute.jsx</h4>
+<p>Wraps all private pages. If no token → <code>&lt;Navigate to="/login"&gt;</code>. Shows spinner while auth state is loading.</p>
+
+<h3>Validation Rules (validators.js)</h3>
+<table>
+  <tr><th>Field</th><th>Rule</th></tr>
+  <tr><td>Email</td><td>Must match valid email format (regex)</td></tr>
+  <tr><td>Password</td><td>Minimum 8 characters</td></tr>
+  <tr><td>Display Name</td><td>Cannot be empty</td></tr>
+  <tr><td>Post Title</td><td>Cannot be empty</td></tr>
+  <tr><td>Post Content</td><td>Required, max 2200 characters</td></tr>
+  <tr><td>Platforms</td><td>At least 1 must be selected</td></tr>
+  <tr><td>Scheduled At</td><td>Must be a future date/time (when status=scheduled)</td></tr>
+  <tr><td>AI Topic</td><td>Required, max 300 characters</td></tr>
+</table>
+
+<!-- ═══════════════════════════════ §7 BACKEND ═══════════════════════════ -->
+<h2>§7 — Backend — Complete Guide</h2>
+
+<h3>Folder Structure</h3>
+<pre>
+backend/
+├── main.py                  ← FastAPI app entry, CORS, routers, lifespan, error handlers
+├── config.py                ← Settings loaded from .env via pydantic-settings
+├── database.py              ← SQLAlchemy engine + session factory + init_db()
+├── models/
+│   ├── user.py              ← User ORM model
+│   ├── post.py              ← Post ORM model
+│   └── platform_token.py   ← PlatformToken ORM model
+├── schemas/
+│   ├── user.py              ← Pydantic schemas for user requests/responses
+│   ├── post.py              ← Pydantic schemas for post requests/responses
+│   └── ai.py                ← Pydantic schemas for AI requests/responses
+├── routers/
+│   ├── auth.py              ← /auth/* endpoints
+│   ├── posts.py             ← /posts/* endpoints
+│   ├── platforms.py         ← /platforms/* endpoints
+│   └── ai.py                ← /ai/* endpoints
+├── services/
+│   ├── auth_service.py      ← Password hashing, JWT create/verify
+│   ├── post_service.py      ← Post CRUD business logic
+│   ├── publish_service.py   ← Orchestrates publishing to platforms
+│   ├── ai_service.py        ← All OpenAI API calls
+│   └── scheduler_service.py ← APScheduler lifecycle + job management
+├── publishers/
+│   ├── base_publisher.py    ← Abstract base: publish(post, token)
+│   ├── twitter_publisher.py
+│   ├── instagram_publisher.py
+│   ├── youtube_publisher.py
+│   └── tiktok_publisher.py
+├── middleware/
+│   └── auth_middleware.py   ← JWT dependency (get_current_user)
+├── utils/
+│   └── errors.py            ← Custom exceptions
+└── tests/
+    ├── conftest.py
+    ├── test_auth.py
+    ├── test_posts.py
+    ├── test_ai.py
+    └── test_publish.py
+</pre>
+
+<h3>Key Modules</h3>
+<table>
+  <tr><th>Module</th><th>Responsibility</th></tr>
+  <tr><td>main.py</td><td>App entry point. Sets up CORS, includes routers, registers global exception handler, manages APScheduler lifecycle via lifespan events.</td></tr>
+  <tr><td>config.py</td><td>Reads all env vars (SECRET_KEY, FERNET_KEY, DATABASE_URL, OPENAI_API_KEY, platform keys) using pydantic-settings.</td></tr>
+  <tr><td>auth_service.py</td><td>Hash passwords with bcrypt, create/verify JWT tokens (HS256, 24h expiry).</td></tr>
+  <tr><td>post_service.py</td><td>All CRUD operations for posts. Checks user ownership before any mutation.</td></tr>
+  <tr><td>publish_service.py</td><td>Loads post + platform tokens, calls the correct publisher for each platform, updates status.</td></tr>
+  <tr><td>ai_service.py</td><td>Wraps OpenAI SDK. Three functions: generate_ideas(), generate_caption(), generate_hashtags(). Each builds a system+user prompt.</td></tr>
+  <tr><td>scheduler_service.py</td><td>APScheduler setup. On startup loads all scheduled posts and registers jobs. Cancels jobs on delete/update.</td></tr>
+</table>
+
+<!-- ═══════════════════════════════ §8 AUTH FLOW ════════════════════════ -->
+<h2>§8 — Authentication Flow</h2>
+
+<h3>Registration</h3>
+<pre>
+POST /auth/register { email, password, display_name }
+  → Validate email uniqueness
+  → Hash password with bcrypt
+  → Insert User row
+  → Create JWT (HS256, 24h expiry, payload: { user_id, exp })
+  → Return { user, access_token }
+</pre>
+
+<h3>Login</h3>
+<pre>
+POST /auth/login { email, password }
+  → Load user by email
+  → bcrypt.verify(password, hashed_password)
+  → Create JWT
+  → Return { user, access_token }
+</pre>
+
+<h3>Protected Routes</h3>
+<pre>
+Request with header: Authorization: Bearer &lt;token&gt;
+  → get_current_user(token) dependency in auth_middleware.py
+    → python-jose decodes JWT, extracts user_id
+    → Load User from DB
+    → Inject into route handler
+</pre>
+
+<div class="box box-yellow">
+  <strong>Note:</strong> JWT is stored in localStorage on the frontend (acceptable for a student/demo project). For production, httpOnly cookies are more secure.
+</div>
+
+<!-- ═══════════════════════════════ §9 AI INTEGRATION ═══════════════════ -->
+<h2>§9 — AI Integration</h2>
+
+<h3>How It Works</h3>
+<ul>
+  <li>Module: <code>services/ai_service.py</code> wraps the OpenAI Python SDK</li>
+  <li>Model used: <code>gpt-4o-mini</code> (cheap + fast)</li>
+  <li>Each function builds a <strong>system prompt</strong> + <strong>user prompt</strong> and calls the API</li>
+  <li>Responses are parsed and returned as structured JSON</li>
+  <li>Rate limited: <strong>15 requests/minute/user</strong> to prevent OpenAI cost abuse</li>
+</ul>
+
+<h3>Three AI Functions</h3>
+<table>
+  <tr><th>Function</th><th>Endpoint</th><th>Input</th><th>Output</th></tr>
+  <tr><td>generate_ideas()</td><td>POST /ai/ideas</td><td>topic, platform</td><td>List of content idea strings</td></tr>
+  <tr><td>generate_caption()</td><td>POST /ai/caption</td><td>topic, platform</td><td>Single caption string</td></tr>
+  <tr><td>generate_hashtags()</td><td>POST /ai/hashtags</td><td>topic, platform</td><td>List of hashtag strings (max 15)</td></tr>
+</table>
+
+<h3>Frontend Integration</h3>
+<p>The <code>AiSuggestionPanel</code> component is embedded inside <code>PostForm</code>. When user clicks "Use This Caption", it calls the <code>onUseCaption</code> callback prop which sets the form's content field. "Insert Hashtags" appends hashtags to existing content.</p>
+
+<!-- ═══════════════════════════════ §10 PUBLISHING ══════════════════════ -->
+<h2>§10 — Publishing &amp; Scheduler</h2>
+
+<h3>Publisher Architecture</h3>
+<ul>
+  <li><code>BasePublisher</code> — abstract class with <code>publish(post, token)</code> method</li>
+  <li>Each platform has its own class: <code>TwitterPublisher</code>, <code>InstagramPublisher</code>, <code>YouTubePublisher</code>, <code>TikTokPublisher</code></li>
+  <li><code>PublishService</code> looks up which platforms a post targets and calls the right publisher</li>
+  <li>If one platform fails, others still get published — failure is isolated</li>
+</ul>
+
+<h3>APScheduler</h3>
+<ul>
+  <li>Runs <strong>in-process</strong> inside FastAPI using lifespan events</li>
+  <li>On startup: loads all posts with <code>status=scheduled</code> and future <code>scheduled_at</code>, registers jobs</li>
+  <li>When a job fires: calls <code>publish_service.publish_post(post_id)</code></li>
+  <li>Post status updated to <code>published</code> or <code>failed</code> in DB</li>
+  <li>Jobs are cancelled when a post is deleted or rescheduled</li>
+</ul>
+
+<!-- ═══════════════════════════════ §11 SECURITY ════════════════════════ -->
+<h2>§11 — Security</h2>
+<table>
+  <tr><th>#</th><th>Measure</th><th>How</th></tr>
+  <tr><td>1</td><td>Password hashing</td><td>bcrypt via passlib — never stored in plaintext</td></tr>
+  <tr><td>2</td><td>JWT signing</td><td>HS256 with SECRET_KEY from env var, 24h expiry</td></tr>
+  <tr><td>3</td><td>OAuth token encryption</td><td>Fernet symmetric encryption before storing in DB</td></tr>
+  <tr><td>4</td><td>Ownership checks</td><td>Every post mutation verifies post.user_id == current_user.id</td></tr>
+  <tr><td>5</td><td>CORS</td><td>Only FRONTEND_URL is allowed — no wildcard origins</td></tr>
+  <tr><td>6</td><td>Secrets management</td><td>.env excluded from git; keys only in environment variables</td></tr>
+  <tr><td>7</td><td>AI rate limiting</td><td>15 requests/minute/user — prevents OpenAI cost abuse</td></tr>
+  <tr><td>8</td><td>Error safety</td><td>Global exception handler returns safe 500 message — no stack traces in production</td></tr>
+</table>
+
+<!-- ═══════════════════════════════ §12 DEPLOYMENT ══════════════════════ -->
+<h2>§12 — Deployment Guide (Render)</h2>
+
+<h3>Live URLs</h3>
+<div class="box box-green">
+  <strong>Frontend:</strong> https://creator-sync-frontend.onrender.com<br/>
+  <strong>Backend API:</strong> https://creatorsync-ewlq.onrender.com<br/>
+  <strong>API Docs (Swagger):</strong> https://creatorsync-ewlq.onrender.com/docs<br/>
+  <strong>Health Check:</strong> https://creatorsync-ewlq.onrender.com/health
+</div>
+
+<h3>Backend Environment Variables</h3>
+<table>
+  <tr><th>Key</th><th>Value</th></tr>
+  <tr><td>SECRET_KEY</td><td>Generated with: python -c "import secrets; print(secrets.token_hex(32))"</td></tr>
+  <tr><td>FERNET_KEY</td><td>Generated with: python -c "from cryptography.fernet import Fernet; print(Fernet.generate_key().decode())"</td></tr>
+  <tr><td>OPENAI_API_KEY</td><td>sk-... from platform.openai.com</td></tr>
+  <tr><td>DATABASE_URL</td><td>sqlite:///./creator_sync.db</td></tr>
+  <tr><td>FRONTEND_URL</td><td>https://creator-sync-frontend.onrender.com</td></tr>
+  <tr><td>ENV</td><td>production</td></tr>
+</table>
+
+<h3>Frontend Environment Variables</h3>
+<table>
+  <tr><th>Key</th><th>Value</th></tr>
+  <tr><td>VITE_API_URL</td><td>https://creatorsync-ewlq.onrender.com</td></tr>
+</table>
+
+<h3>Backend Settings (Render Web Service)</h3>
+<ul>
+  <li>Root Directory: <code>backend</code></li>
+  <li>Build Command: <code>pip install -r requirements.txt</code></li>
+  <li>Start Command: <code>uvicorn main:app --host 0.0.0.0 --port $PORT</code></li>
+</ul>
+
+<h3>Frontend Settings (Render Static Site)</h3>
+<ul>
+  <li>Root Directory: <code>frontend</code></li>
+  <li>Build Command: <code>npm install &amp;&amp; npm run build</code></li>
+  <li>Publish Directory: <code>dist</code></li>
+</ul>
+
+<h3>Keep Alive (UptimeRobot)</h3>
+<p>Render free tier sleeps after 15 min of inactivity. Set up UptimeRobot to ping <code>/health</code> every 5 minutes to keep it awake and APScheduler running.</p>
+
+<!-- ═══════════════════════════════ §13 LIMITATIONS ═════════════════════ -->
+<h2>§13 — Known Limitations</h2>
+<table>
+  <tr><th>Limitation</th><th>Reason</th><th>Workaround</th></tr>
+  <tr><td>Scheduled posts don't fire on sleep</td><td>Render free tier sleeps after 15 min</td><td>UptimeRobot ping every 5 min</td></tr>
+  <tr><td>Database resets on redeploy</td><td>No persistent disk on free tier</td><td>Acceptable for demo; upgrade to paid tier for production</td></tr>
+  <tr><td>SQLite single-writer</td><td>Not for multi-instance deployments</td><td>Migrate to PostgreSQL for production</td></tr>
+  <tr><td>TikTok publishing</td><td>Requires developer app approval</td><td>Publisher returns stub/error until approved</td></tr>
+  <tr><td>Instagram personal accounts</td><td>Graph API only supports Business/Creator accounts</td><td>Document requirement for users</td></tr>
+  <tr><td>Media uploads</td><td>Only URL-based media supported</td><td>Use externally hosted image/video URLs</td></tr>
+  <tr><td>FERNET_KEY loss</td><td>All stored OAuth tokens become unreadable</td><td>Back up the key permanently</td></tr>
+</table>
+
+<!-- ═══════════════════════════════ §14 JUDGE Q&A FRONTEND ══════════════ -->
+<h2>§14 — SIH Judge Q&amp;A — Frontend</h2>
+
+<div class="qa">
+  <div class="q">Q: Why did you use React over plain HTML/JS?</div>
+  <div class="a">React's component model lets us reuse pieces like <code>PostForm</code> and <code>AiSuggestionPanel</code> across multiple pages without duplicating code. State management with useState and useContext keeps the UI automatically in sync with data.</div>
+</div>
+<div class="qa">
+  <div class="q">Q: How does the frontend know if the user is logged in?</div>
+  <div class="a">The JWT token is stored in localStorage. On every app load, AuthContext calls <code>/auth/me</code> to verify the token is still valid. If it fails, the user is logged out automatically and redirected to /login.</div>
+</div>
+<div class="qa">
+  <div class="q">Q: What happens if the JWT token expires mid-session?</div>
+  <div class="a">The Axios response interceptor in axiosClient.js catches any 401 response, clears the token from localStorage, and redirects to /login — all automatically without any extra code in the pages.</div>
+</div>
+<div class="qa">
+  <div class="q">Q: How does AI-generated content get inserted into the post form?</div>
+  <div class="a">AiSuggestionPanel receives an <code>onUseCaption</code> callback prop from PostForm. When the user clicks "Use This Caption", it calls that callback which updates the content field in the form's state via React's controlled component pattern.</div>
+</div>
+<div class="qa">
+  <div class="q">Q: How is the calendar built?</div>
+  <div class="a">We use the <code>react-big-calendar</code> library with a date-fns localizer. Posts with a scheduled_at date are converted into calendar events. Color-coding (yellow=scheduled, green=published, red=failed) is applied via eventStyleGetter based on post status.</div>
+</div>
+<div class="qa">
+  <div class="q">Q: What is Tailwind CSS and why use it?</div>
+  <div class="a">Tailwind CSS is a utility-first CSS framework. Styles are applied directly as class names like <code>bg-white rounded-xl p-4</code> instead of writing separate CSS files. It speeds up UI development significantly and keeps styling consistent.</div>
+</div>
+<div class="qa">
+  <div class="q">Q: How do you prevent unauthorized access to pages?</div>
+  <div class="a">ProtectedRoute.jsx wraps all private pages. If no token exists in localStorage, it uses React Router's &lt;Navigate&gt; to redirect to /login before rendering anything.</div>
+</div>
+<div class="qa">
+  <div class="q">Q: Is the frontend mobile responsive?</div>
+  <div class="a">Yes. Tailwind's responsive prefixes (sm:, md:, lg:) are used throughout. The Navbar has a hamburger menu on mobile. The dashboard grid switches from 1 to 2 to 3 columns based on screen size using Tailwind grid classes.</div>
+</div>
+<div class="qa">
+  <div class="q">Q: How does the frontend communicate with the backend?</div>
+  <div class="a">All API calls go through axiosClient.js which is configured with VITE_API_URL as the base URL. The JWT token is automatically attached to every request via a request interceptor. Separate api/ modules (authApi, postsApi, etc.) keep API calls organized.</div>
+</div>
+<div class="qa">
+  <div class="q">Q: What happens when the user submits an empty form?</div>
+  <div class="a">validators.js runs client-side validation before any API call is made. Field-level error messages appear inline below each input (e.g. "Content is required.", "Select at least one platform."). The form does not submit until all validations pass.</div>
+</div>
+
+<!-- ═══════════════════════════════ §15 JUDGE Q&A BACKEND ═══════════════ -->
+<h2>§15 — SIH Judge Q&amp;A — Backend</h2>
+
+<div class="qa">
+  <div class="q">Q: Why FastAPI over Django or Flask?</div>
+  <div class="a">FastAPI is async-first, auto-generates interactive API docs (Swagger at /docs), has built-in Pydantic validation, and is significantly faster than Flask. It's also more beginner-friendly than Django for API-only backends.</div>
+</div>
+<div class="qa">
+  <div class="q">Q: How are passwords stored?</div>
+  <div class="a">Passwords are hashed using bcrypt via the passlib library. Only the hash is stored in the database — the original password is never stored anywhere. On login, bcrypt.verify() compares the entered password against the stored hash.</div>
+</div>
+<div class="qa">
+  <div class="q">Q: How does JWT authentication work?</div>
+  <div class="a">On login, the backend creates a JWT signed with HS256 using a SECRET_KEY environment variable. The token contains user_id and an expiry (24h). Every protected route uses a FastAPI Depends(get_current_user) which decodes and validates the token from the Authorization header.</div>
+</div>
+<div class="qa">
+  <div class="q">Q: How are platform OAuth tokens kept secure?</div>
+  <div class="a">OAuth tokens (access_token, refresh_token) are encrypted using Fernet symmetric encryption from the cryptography library before being stored in the database. They are decrypted only when needed for publishing. The FERNET_KEY is stored only in environment variables.</div>
+</div>
+<div class="qa">
+  <div class="q">Q: How does the background scheduler work?</div>
+  <div class="a">APScheduler runs inside the FastAPI process. On startup (lifespan event), it loads all posts with status=scheduled and registers a job for each at their scheduled_at time. When a job fires, it calls publish_service.publish_post(). Jobs are cancelled on delete/reschedule.</div>
+</div>
+<div class="qa">
+  <div class="q">Q: What happens if one platform fails to publish?</div>
+  <div class="a">Each platform publisher is called independently. If one fails, the error is caught, the post's publish_error field is updated with the message, and publishing continues to the other platforms. A failure on TikTok does not stop Instagram from publishing.</div>
+</div>
+<div class="qa">
+  <div class="q">Q: Why SQLite instead of PostgreSQL?</div>
+  <div class="a">SQLite is zero-config and file-based — perfect for a single-server student project. The ORM (SQLAlchemy) abstracts the database, so migrating to PostgreSQL later only requires changing the DATABASE_URL environment variable.</div>
+</div>
+<div class="qa">
+  <div class="q">Q: How is CORS configured?</div>
+  <div class="a">In main.py, CORSMiddleware is configured to only allow requests from FRONTEND_URL (the deployed Render frontend URL). In development, localhost:5173 is also allowed. This prevents other websites from making API calls on behalf of users.</div>
+</div>
+
+<!-- ═══════════════════════════════ §16 JUDGE Q&A GENERAL ═══════════════ -->
+<h2>§16 — SIH Judge Q&amp;A — General / Product</h2>
+
+<div class="qa">
+  <div class="q">Q: What problem does CreatorSync solve?</div>
+  <div class="a">Content creators waste 2-3 hours daily switching between multiple platforms, manually writing captions, and scheduling posts. CreatorSync centralizes everything — plan on the calendar, generate AI content, and auto-publish to all platforms from one tool.</div>
+</div>
+<div class="qa">
+  <div class="q">Q: Who is your target user?</div>
+  <div class="a">Social media content creators, especially India's 80M+ creator economy. From small individual creators to mid-size influencers who manage YouTube, Instagram, TikTok, and Twitter simultaneously.</div>
+</div>
+<div class="qa">
+  <div class="q">Q: What is your innovation?</div>
+  <div class="a">The combination of AI-powered content generation (GPT-4o-mini) directly integrated into the scheduling workflow. A creator can go from topic idea → AI-generated caption + hashtags → scheduled post → auto-published — all in one app without switching tools.</div>
+</div>
+<div class="qa">
+  <div class="q">Q: How is this different from Buffer or Hootsuite?</div>
+  <div class="a">Buffer and Hootsuite are expensive SaaS tools ($15-$99/month). CreatorSync is open-source and free to deploy. It also has built-in AI content generation which most basic tiers of those tools don't include.</div>
+</div>
+<div class="qa">
+  <div class="q">Q: What is the future scope?</div>
+  <div class="a">Analytics dashboard (views/likes/reach per post), team collaboration with approval workflows, native mobile app (React Native), support for LinkedIn/Pinterest, and a freemium SaaS model targeting the Indian creator economy.</div>
+</div>
+<div class="qa">
+  <div class="q">Q: How would you scale this for millions of users?</div>
+  <div class="a">Replace SQLite with PostgreSQL, move APScheduler to Celery + Redis for distributed task queuing, deploy backend as multiple instances behind a load balancer, and use a CDN for frontend assets. The SQLAlchemy ORM and FastAPI architecture support this migration without major rewrites.</div>
+</div>
+<div class="qa">
+  <div class="q">Q: How did you test the application?</div>
+  <div class="a">Backend: pytest with httpx TestClient — unit tests for services and integration tests for each router using an in-memory SQLite test DB. Frontend: Vitest + React Testing Library for validators and components. CI/CD: GitHub Actions runs all tests automatically on every push to main.</div>
+</div>
+
+<hr/>
+<p style="text-align:center; color:#888; font-size:11px; margin-top:20px;">
+  CreatorSync — Complete Project Guide &nbsp;|&nbsp; Smart India Hackathon 2025 &nbsp;|&nbsp; Made with IBM Bob
+</p>
+
+</body>
+</html>

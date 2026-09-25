@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Custom scrollbar for calendar */
+/* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
 }
@@ -10,20 +10,67 @@
   background: #f1f5f9;
 }
 ::-webkit-scrollbar-thumb {
-  background: #94a3b8;
+  background: #a78bfa;
   border-radius: 3px;
 }
 
-/* react-big-calendar base theme overrides */
+/* react-big-calendar theme overrides — purple brand */
 .rbc-calendar {
-  @apply font-sans;
+  @apply font-sans text-sm;
 }
+
+.rbc-toolbar {
+  @apply mb-4 flex-wrap gap-2;
+}
+
 .rbc-toolbar button {
-  @apply cursor-pointer;
+  @apply cursor-pointer px-3 py-1.5 rounded-lg text-sm font-medium text-gray-600
+         border border-gray-200 bg-white hover:bg-purple-50 hover:text-purple-700
+         hover:border-purple-300 transition-all duration-150;
 }
+
+.rbc-toolbar button.rbc-active {
+  @apply bg-gradient-to-r from-purple-600 to-indigo-600 text-white border-transparent
+         shadow-sm;
+}
+
+.rbc-toolbar .rbc-toolbar-label {
+  @apply text-base font-bold text-gray-800;
+}
+
 .rbc-event {
-  @apply bg-brand-500 border-brand-600 rounded text-xs;
+  @apply rounded-md text-xs font-semibold;
+  border: none !important;
 }
+
+.rbc-event.rbc-selected {
+  @apply ring-2 ring-white ring-offset-1;
+}
+
 .rbc-today {
-  @apply bg-brand-50;
+  background-color: #f5f3ff !important; /* purple-50 */
+}
+
+.rbc-header {
+  @apply py-2 text-xs font-semibold text-gray-500 uppercase tracking-wider;
+}
+
+.rbc-month-view {
+  @apply rounded-xl overflow-hidden border border-gray-100;
+}
+
+.rbc-date-cell {
+  @apply text-xs text-gray-500 p-1;
+}
+
+.rbc-off-range-bg {
+  background-color: #fafafa;
+}
+
+.rbc-show-more {
+  @apply text-xs text-purple-600 font-medium;
+}
+
+.rbc-day-slot .rbc-time-slot {
+  @apply border-t border-gray-100;
 }

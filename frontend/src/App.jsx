@@ -52,7 +52,20 @@ export default function App() {
     <ErrorBoundary>
       <AuthProvider>
         <BrowserRouter>
-          <Toaster position="top-right" />
+          <Toaster
+            position="top-right"
+            toastOptions={{
+              style: {
+                borderRadius: '12px',
+                padding: '12px 16px',
+                fontSize: '14px',
+                fontWeight: '500',
+                boxShadow: '0 4px 20px rgba(0,0,0,0.12)',
+              },
+              success: { iconTheme: { primary: '#7c3aed', secondary: '#fff' } },
+              error:   { iconTheme: { primary: '#ef4444', secondary: '#fff' } },
+            }}
+          />
           <div className="min-h-screen bg-gray-50 flex flex-col">
             <Routes>
               {/* Public routes */}
